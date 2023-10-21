@@ -1,0 +1,64 @@
+# Hypothesis
+
+```{r,include=FALSE}
+library(knitr)
+opts_chunk$set(tidy = TRUE, tidy.opts = list(width.cutoff = 40))
+```
+
+## Density Plot for Height and Weight
+
+```{r, include=FALSE}
+library(crayon)
+library(ggplot2)
+library(gridExtra)
+library(reshape2)
+```
+
+### Density Plot for Height Distribution Over Seasons
+
+```{r, fig.width=11, fig.height=5}
+heightplot <- ggplot(nba, aes(x = player_height)) +
+  geom_density(aes(fill = season), alpha = 0.4) +
+  geom_vline(aes(xintercept = mean(player_height)), linetype = "dashed", color = "red") +
+  ggtitle("Density Plot of Player Heights") +
+  xlab("Player Height (cm)") +
+  ylab("Density") +
+  theme_minimal()
+print(heightplot)
+```
+
+#### Summary
+
+- A more noticeable shift in the mean height of players over seasons. The mean height has decreased steadily.
+
+- A narrower range of heights among players in the recent NBA compared to the past.
+
+- There's a noticeable peak around the 200-210 cm range, suggesting that a significant number of players fall within this height bracket.
+
+### Density Plot for Weight Distribution Over Seasons
+
+```{r, fig.width=11, fig.height=5}
+weightplot <- ggplot(nba, aes(x = player_weight)) +
+  geom_density(aes(fill = season), alpha = 0.4) +
+  geom_vline(aes(xintercept = mean(player_weight)), linetype = "dashed", color = "red") +
+  ggtitle("Density Plot of Player Weights") +
+  xlab("Player Weight (kg)") +
+  ylab("Density") +
+  theme_minimal()
+print(weightplot)
+```
+
+#### Summary
+
+- The mean weight seems to have shifted towards the left, suggesting that players have, on average, become lighter over the years.
+- The distributions for the recent seasons appear narrower, indicating less variability in player weights now than in earlier seasons.
+
+### General Conclusion
+
+In summary, over the years, NBA players have, on average, become shorter and lighter, with a narrower range of both weights and heights represented in recent seasons.
+
+## Inference & Hypothesis Based On The Density Plot and Initial Summary
+
+- **H1** Versatility & Position-less Basketball: the narrower range of heights and weights indicates that there might be an increasing trend of “position-less” basketball, specifically players are no longer strictly confined to traditional roles based on their physical attributes.
+
+- **H2** Evolution in Playing Style: the traditional center-focused style of play cannot adapt to the pace of the modern NBA.

@@ -1,0 +1,44 @@
+# In-depth Analysis for H/W
+
+## What Can Be Answered For Now?
+
+- H1: Versatility & Position-less Basketball
+Given the narrow range of heights and weights and the varied performance of players irrespective of their physical attributes, it does hint towards the emergence of "position-less" basketball. Players are breaking traditional molds, and their skills are no longer just confined to their height and weight.
+
+- H2: Evolution in Playing Style
+The NBA's pace and style have evolved, favoring versatile players over traditional roles. The varied performances of players, especially the medium-height ones, and the shift from a strong center-focused game further supports this hypothesis.
+
+```{r,include=FALSE}
+library(knitr)
+opts_chunk$set(tidy = TRUE, tidy.opts = list(width.cutoff = 20))
+```
+
+```{r, fig.width=12, fig.height=5}
+p1<-ggplot(nba,aes(x=player_weight,y=player_height))
+p1<-p1+geom_point()
+p1+geom_smooth()
+```
+
+## Time-series Visualization
+
+To further explore H1 and H2, a time-series analysis portraying the fluctuating correlation between height and weight over seasons has been drawn.
+
+```{r,include=FALSE}
+cor_all <- by(nba[, c("player_height", "player_weight")], INDICES = nba$season, function(x) cor(x))
+cor_values <- sapply(cor_all, function(x) x[1, 2])
+cor_df <- data.frame(season = names(cor_values), correlation = cor_values)
+```
+```{r, fig.width=12, fig.height=5}
+p <- ggplot(cor_df, aes(x = season, y = correlation, group = 1)) +
+  geom_line() +
+  xlab("Season") +
+  ylab("Correlation between Height and Weight") +
+  ggtitle("Correlation between Height and Weight over Seasons") +
+  theme_minimal()
+print(p)
+```
+
+## Summary From 4.2
+
+- A significant higher correlation between height and weight can be observed between season 1996-97 and 2009-10, suggesting a stronger relationship between a player's height and weight. This could have been due to the prevalence of taditional roles and the center-focused game styles, if we recall who were the most dominant players at that time (e.g., Shaquille O'Neal, Hakeem Olajuwon, Tim Duncan, Karl Malone, Dirk Nowitzki, Kevin Garnett)
+- Since the season 2009-10 , the correlation dips, suggesting a weaker relationship between height and weight. This potentially supports the hypothesis of "position-less" basketball becoming more prevalent, as players' roles become less defined by their physical attributes.

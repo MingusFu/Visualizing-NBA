@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Clustering | Visualizing NBA</title>
+  <meta name="description" content="5 Clustering | Visualizing NBA" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Clustering | Visualizing NBA" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Clustering | Visualizing NBA" />
+  
+  
+  
+
+<meta name="author" content="Junqi Fu" />
+
+
+<meta name="date" content="2023-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="in-depth-analysis-for-hw.html"/>
+<link rel="next" href="transition-of-nba-over-last-20-years.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Visualizing NBA</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> NBA Data</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-type"><i class="fa fa-check"></i><b>1.1</b> Data Type</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#preliminary-cleaning"><i class="fa fa-check"></i><b>1.2</b> Preliminary Cleaning</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#initial-missing-data-imputation"><i class="fa fa-check"></i><b>1.2.1</b> Initial Missing Data Imputation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#data-cleaning"><i class="fa fa-check"></i><b>1.2.2</b> Data Cleaning</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preliminary-descriptive-statistics"><i class="fa fa-check"></i><b>1.3</b> Preliminary Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothesis.html"><a href="hypothesis.html"><i class="fa fa-check"></i><b>2</b> Hypothesis</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hypothesis.html"><a href="hypothesis.html#density-plot-for-height-and-weight"><i class="fa fa-check"></i><b>2.1</b> Density Plot for Height and Weight</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="hypothesis.html"><a href="hypothesis.html#density-plot-for-height-distribution-over-seasons"><i class="fa fa-check"></i><b>2.1.1</b> Density Plot for Height Distribution Over Seasons</a></li>
+<li class="chapter" data-level="2.1.2" data-path="hypothesis.html"><a href="hypothesis.html#density-plot-for-weight-distribution-over-seasons"><i class="fa fa-check"></i><b>2.1.2</b> Density Plot for Weight Distribution Over Seasons</a></li>
+<li class="chapter" data-level="2.1.3" data-path="hypothesis.html"><a href="hypothesis.html#general-conclusion"><i class="fa fa-check"></i><b>2.1.3</b> General Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="hypothesis.html"><a href="hypothesis.html#inference-hypothesis-based-on-the-density-plot-and-initial-summary"><i class="fa fa-check"></i><b>2.2</b> Inference &amp; Hypothesis Based On The Density Plot and Initial Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="correlation-analysis.html"><a href="correlation-analysis.html"><i class="fa fa-check"></i><b>3</b> Correlation Analysis</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="correlation-analysis.html"><a href="correlation-analysis.html#correlation-between-hw-and-others"><i class="fa fa-check"></i><b>3.1</b> Correlation Between H/W and Others</a></li>
+<li class="chapter" data-level="3.2" data-path="correlation-analysis.html"><a href="correlation-analysis.html#correlation-matrix"><i class="fa fa-check"></i><b>3.2</b> Correlation Matrix</a></li>
+<li class="chapter" data-level="3.3" data-path="correlation-analysis.html"><a href="correlation-analysis.html#correlation-between-hw-and-ra"><i class="fa fa-check"></i><b>3.3</b> Correlation Between H/W and R/A</a></li>
+<li class="chapter" data-level="3.4" data-path="correlation-analysis.html"><a href="correlation-analysis.html#summary-from-scatter-plots"><i class="fa fa-check"></i><b>3.4</b> Summary From Scatter Plots</a></li>
+<li class="chapter" data-level="3.5" data-path="correlation-analysis.html"><a href="correlation-analysis.html#net-rating-by-players-physical-attributes"><i class="fa fa-check"></i><b>3.5</b> Net Rating By Player’s Physical Attributes</a></li>
+<li class="chapter" data-level="3.6" data-path="correlation-analysis.html"><a href="correlation-analysis.html#summary-from-box-plot"><i class="fa fa-check"></i><b>3.6</b> Summary From Box Plot</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="correlation-analysis.html"><a href="correlation-analysis.html#net-rating-by-player-height"><i class="fa fa-check"></i><b>3.6.1</b> Net Rating by Player Height</a></li>
+<li class="chapter" data-level="3.6.2" data-path="correlation-analysis.html"><a href="correlation-analysis.html#net-rating-by-player-weight"><i class="fa fa-check"></i><b>3.6.2</b> Net Rating by Player Weight</a></li>
+<li class="chapter" data-level="3.6.3" data-path="correlation-analysis.html"><a href="correlation-analysis.html#general-summary"><i class="fa fa-check"></i><b>3.6.3</b> General Summary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="in-depth-analysis-for-hw.html"><a href="in-depth-analysis-for-hw.html"><i class="fa fa-check"></i><b>4</b> In-depth Analysis for H/W</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="in-depth-analysis-for-hw.html"><a href="in-depth-analysis-for-hw.html#what-can-be-answered-for-now"><i class="fa fa-check"></i><b>4.1</b> What Can Be Answered For Now?</a></li>
+<li class="chapter" data-level="4.2" data-path="in-depth-analysis-for-hw.html"><a href="in-depth-analysis-for-hw.html#time-series-visualization"><i class="fa fa-check"></i><b>4.2</b> Time-series Visualization</a></li>
+<li class="chapter" data-level="4.3" data-path="in-depth-analysis-for-hw.html"><a href="in-depth-analysis-for-hw.html#summary-from-4.2"><i class="fa fa-check"></i><b>4.3</b> Summary From 4.2</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>5</b> Clustering</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="clustering.html"><a href="clustering.html#k-means-clustering-of-players"><i class="fa fa-check"></i><b>5.1</b> k-means Clustering Of Players</a></li>
+<li class="chapter" data-level="5.2" data-path="clustering.html"><a href="clustering.html#summary-from-the-clustering"><i class="fa fa-check"></i><b>5.2</b> Summary From the Clustering</a></li>
+<li class="chapter" data-level="5.3" data-path="clustering.html"><a href="clustering.html#hierachical-clustering"><i class="fa fa-check"></i><b>5.3</b> Hierachical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="transition-of-nba-over-last-20-years.html"><a href="transition-of-nba-over-last-20-years.html"><i class="fa fa-check"></i><b>6</b> Transition of NBA Over Last 20 Years</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="transition-of-nba-over-last-20-years.html"><a href="transition-of-nba-over-last-20-years.html#versatility-position-less-basketball"><i class="fa fa-check"></i><b>6.1</b> Versatility &amp; Position-less Basketball</a></li>
+<li class="chapter" data-level="6.2" data-path="transition-of-nba-over-last-20-years.html"><a href="transition-of-nba-over-last-20-years.html#evolution-in-playing-style"><i class="fa fa-check"></i><b>6.2</b> Evolution in Playing Style</a></li>
+<li class="chapter" data-level="6.3" data-path="transition-of-nba-over-last-20-years.html"><a href="transition-of-nba-over-last-20-years.html#potential-future-trends"><i class="fa fa-check"></i><b>6.3</b> Potential Future Trends</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Visualizing NBA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="clustering" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Clustering<a href="clustering.html#clustering" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="k-means-clustering-of-players" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> k-means Clustering Of Players<a href="clustering.html#k-means-clustering-of-players" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To further investigate the transition in playing style and the trend toward position-less basketball, clustering analysis were conducted. This analysis used selected features including player height, weight, rebounds, assists, net rating, offensive rebounds, defensive rebounds, usage percentage, true shooting percentage, and assist percentage.</p>
+<p><strong>What Data Was Included</strong></p>
+<p>Given that more than 200 players participate in each NBA season and audiences generally remember high-scoring players, I applied specific criteria for more clear and understandable visualization results. For the selected seasons, only players who participated in more than 50 games and had an average score exceeding 10 points were included in the analysis.</p>
+<p><strong>Selected Season</strong></p>
+<ul>
+<li><p>Based on the visualization in Section 4.2, a stronger correlation between height and weight (H/W) is evident between the seasons 1996-97 and 2009-10. This suggests a traditional, center-focused playing style, with a peak occurring in the 2000-01 season. To examine how player performance styles were clustered during periods when traditional styles dominated, we selected the 2000-01 and 2009-10 seasons.</p></li>
+<li><p>NBA fans commonly believe that the “small-ball center” and “three-point trend” popularized by Stephen Curry’s Golden State Warriors from 2015 to 2019 were catalysts for the transition in playing styles. To explore how player performance styles have evolved in more recent years, I selected the 2015-16 season and the most current season, 2022-2023.</p></li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="clustering.html#cb32-1" tabindex="-1"></a>nba_selected_season <span class="ot">&lt;-</span> nba[(<span class="fu">which</span>(nba<span class="sc">$</span>season <span class="sc">==</span></span>
+<span id="cb32-2"><a href="clustering.html#cb32-2" tabindex="-1"></a>    <span class="st">&quot;2022-23&quot;</span>)), ]</span>
+<span id="cb32-3"><a href="clustering.html#cb32-3" tabindex="-1"></a>nba_selected_season <span class="ot">&lt;-</span> nba_selected_season[nba_selected_season<span class="sc">$</span>pts <span class="sc">&gt;</span></span>
+<span id="cb32-4"><a href="clustering.html#cb32-4" tabindex="-1"></a>    <span class="dv">10</span>, ]</span>
+<span id="cb32-5"><a href="clustering.html#cb32-5" tabindex="-1"></a>nba_selected_season <span class="ot">&lt;-</span> nba_selected_season[nba_selected_season<span class="sc">$</span>gp <span class="sc">&gt;</span></span>
+<span id="cb32-6"><a href="clustering.html#cb32-6" tabindex="-1"></a>    <span class="dv">50</span>, ]</span>
+<span id="cb32-7"><a href="clustering.html#cb32-7" tabindex="-1"></a><span class="fu">rownames</span>(nba_selected_season) <span class="ot">&lt;-</span> nba_selected_season<span class="sc">$</span>player_name</span>
+<span id="cb32-8"><a href="clustering.html#cb32-8" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="clustering.html#cb32-9" tabindex="-1"></a>selected_features <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;player_height&quot;</span>,</span>
+<span id="cb32-10"><a href="clustering.html#cb32-10" tabindex="-1"></a>    <span class="st">&quot;pts&quot;</span>, <span class="st">&quot;player_weight&quot;</span>,</span>
+<span id="cb32-11"><a href="clustering.html#cb32-11" tabindex="-1"></a>    <span class="st">&quot;reb&quot;</span>, <span class="st">&quot;ast&quot;</span>, <span class="st">&quot;net_rating&quot;</span>,</span>
+<span id="cb32-12"><a href="clustering.html#cb32-12" tabindex="-1"></a>    <span class="st">&quot;oreb_pct&quot;</span>, <span class="st">&quot;dreb_pct&quot;</span>,</span>
+<span id="cb32-13"><a href="clustering.html#cb32-13" tabindex="-1"></a>    <span class="st">&quot;usg_pct&quot;</span>, <span class="st">&quot;ts_pct&quot;</span>,</span>
+<span id="cb32-14"><a href="clustering.html#cb32-14" tabindex="-1"></a>    <span class="st">&quot;ast_pct&quot;</span>)</span>
+<span id="cb32-15"><a href="clustering.html#cb32-15" tabindex="-1"></a>nba_for_clustering <span class="ot">&lt;-</span> nba_selected_season <span class="sc">%&gt;%</span></span>
+<span id="cb32-16"><a href="clustering.html#cb32-16" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">all_of</span>(selected_features))</span>
+<span id="cb32-17"><a href="clustering.html#cb32-17" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="clustering.html#cb32-18" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(nba_for_clustering))</span>
+<span id="cb32-19"><a href="clustering.html#cb32-19" tabindex="-1"></a></span>
+<span id="cb32-20"><a href="clustering.html#cb32-20" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="clustering.html#cb32-21" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(df, kmeans,</span>
+<span id="cb32-22"><a href="clustering.html#cb32-22" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;wss&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-23"><a href="clustering.html#cb32-23" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">7</span>,</span>
+<span id="cb32-24"><a href="clustering.html#cb32-24" tabindex="-1"></a>        <span class="at">linetype =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-29-1.png" width="1152" /></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="clustering.html#cb33-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb33-2"><a href="clustering.html#cb33-2" tabindex="-1"></a>km_result <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(df,</span>
+<span id="cb33-3"><a href="clustering.html#cb33-3" tabindex="-1"></a>    <span class="at">centers =</span> <span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="clustering.html#cb34-1" tabindex="-1"></a>clustering_23 <span class="ot">&lt;-</span> <span class="fu">fviz_cluster</span>(km_result,</span>
+<span id="cb34-2"><a href="clustering.html#cb34-2" tabindex="-1"></a>    <span class="at">data =</span> df, <span class="at">ellipse.type =</span> <span class="st">&quot;euclid&quot;</span>,</span>
+<span id="cb34-3"><a href="clustering.html#cb34-3" tabindex="-1"></a>    <span class="at">ellipse.level =</span> <span class="fl">0.5</span>,</span>
+<span id="cb34-4"><a href="clustering.html#cb34-4" tabindex="-1"></a>    <span class="at">ellipse.ratio =</span> <span class="fl">0.8</span>,</span>
+<span id="cb34-5"><a href="clustering.html#cb34-5" tabindex="-1"></a>    <span class="at">star.plot =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-6"><a href="clustering.html#cb34-6" tabindex="-1"></a>    <span class="at">repel =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">&quot;NBA 2022-2023&quot;</span>,</span>
+<span id="cb34-7"><a href="clustering.html#cb34-7" tabindex="-1"></a>    <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>())</span>
+<span id="cb34-8"><a href="clustering.html#cb34-8" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="clustering.html#cb34-9" tabindex="-1"></a>clustering_23 <span class="ot">&lt;-</span> clustering_23 <span class="sc">+</span></span>
+<span id="cb34-10"><a href="clustering.html#cb34-10" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">30</span>,</span>
+<span id="cb34-11"><a href="clustering.html#cb34-11" tabindex="-1"></a>        <span class="at">face =</span> <span class="st">&quot;italic&quot;</span>,</span>
+<span id="cb34-12"><a href="clustering.html#cb34-12" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb34-13"><a href="clustering.html#cb34-13" tabindex="-1"></a>        <span class="at">hjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb34-14"><a href="clustering.html#cb34-14" tabindex="-1"></a>        <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">angle =</span> <span class="dv">0</span>,</span>
+<span id="cb34-15"><a href="clustering.html#cb34-15" tabindex="-1"></a>        <span class="at">lineheight =</span> <span class="fl">1.2</span>))</span></code></pre></div>
+<p><strong>For season 2000-01</strong></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="clustering.html#cb35-1" tabindex="-1"></a><span class="fu">print</span>(clustering_01)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-32-1.png" width="2016" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="clustering.html#cb36-1" tabindex="-1"></a><span class="fu">kable</span>(mean_values_01)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+cluster
+</th>
+<th style="text-align:right;">
+player_height
+</th>
+<th style="text-align:right;">
+player_weight
+</th>
+<th style="text-align:right;">
+pts
+</th>
+<th style="text-align:right;">
+reb
+</th>
+<th style="text-align:right;">
+ast
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+200.3213
+</td>
+<td style="text-align:right;">
+97.58276
+</td>
+<td style="text-align:right;">
+23.06667
+</td>
+<td style="text-align:right;">
+5.740000
+</td>
+<td style="text-align:right;">
+4.360000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+209.9733
+</td>
+<td style="text-align:right;">
+116.49755
+</td>
+<td style="text-align:right;">
+24.00000
+</td>
+<td style="text-align:right;">
+11.300000
+</td>
+<td style="text-align:right;">
+3.750000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+209.4089
+</td>
+<td style="text-align:right;">
+110.37405
+</td>
+<td style="text-align:right;">
+14.03889
+</td>
+<td style="text-align:right;">
+8.505556
+</td>
+<td style="text-align:right;">
+1.650000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+186.7568
+</td>
+<td style="text-align:right;">
+84.94107
+</td>
+<td style="text-align:right;">
+15.83158
+</td>
+<td style="text-align:right;">
+3.736842
+</td>
+<td style="text-align:right;">
+6.742105
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+198.7296
+</td>
+<td style="text-align:right;">
+96.77839
+</td>
+<td style="text-align:right;">
+13.65200
+</td>
+<td style="text-align:right;">
+3.984000
+</td>
+<td style="text-align:right;">
+2.472000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+204.6705
+</td>
+<td style="text-align:right;">
+107.38194
+</td>
+<td style="text-align:right;">
+14.04211
+</td>
+<td style="text-align:right;">
+6.105263
+</td>
+<td style="text-align:right;">
+1.921053
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+191.5160
+</td>
+<td style="text-align:right;">
+88.63188
+</td>
+<td style="text-align:right;">
+16.12000
+</td>
+<td style="text-align:right;">
+4.440000
+</td>
+<td style="text-align:right;">
+6.420000
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>For season 2009-10</strong></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="clustering.html#cb37-1" tabindex="-1"></a><span class="fu">print</span>(clustering_10)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-35-1.png" width="2016" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="clustering.html#cb38-1" tabindex="-1"></a><span class="fu">kable</span>(mean_values_10)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+cluster
+</th>
+<th style="text-align:right;">
+player_height
+</th>
+<th style="text-align:right;">
+player_weight
+</th>
+<th style="text-align:right;">
+pts
+</th>
+<th style="text-align:right;">
+reb
+</th>
+<th style="text-align:right;">
+ast
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+192.5320
+</td>
+<td style="text-align:right;">
+92.16989
+</td>
+<td style="text-align:right;">
+17.78000
+</td>
+<td style="text-align:right;">
+4.920000
+</td>
+<td style="text-align:right;">
+9.800000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+210.0792
+</td>
+<td style="text-align:right;">
+117.59373
+</td>
+<td style="text-align:right;">
+16.15000
+</td>
+<td style="text-align:right;">
+9.754167
+</td>
+<td style="text-align:right;">
+1.991667
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+187.4253
+</td>
+<td style="text-align:right;">
+84.94107
+</td>
+<td style="text-align:right;">
+14.20526
+</td>
+<td style="text-align:right;">
+2.705263
+</td>
+<td style="text-align:right;">
+4.673684
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+195.1789
+</td>
+<td style="text-align:right;">
+93.79805
+</td>
+<td style="text-align:right;">
+19.55789
+</td>
+<td style="text-align:right;">
+4.378947
+</td>
+<td style="text-align:right;">
+5.252632
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+206.3262
+</td>
+<td style="text-align:right;">
+106.50689
+</td>
+<td style="text-align:right;">
+15.16923
+</td>
+<td style="text-align:right;">
+5.715385
+</td>
+<td style="text-align:right;">
+1.834615
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+193.9471
+</td>
+<td style="text-align:right;">
+91.36639
+</td>
+<td style="text-align:right;">
+13.10714
+</td>
+<td style="text-align:right;">
+2.964286
+</td>
+<td style="text-align:right;">
+2.650000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+205.5446
+</td>
+<td style="text-align:right;">
+107.67576
+</td>
+<td style="text-align:right;">
+14.13462
+</td>
+<td style="text-align:right;">
+6.519231
+</td>
+<td style="text-align:right;">
+2.338462
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>For season 2015-16</strong></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="clustering.html#cb39-1" tabindex="-1"></a><span class="fu">print</span>(clustering_16)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-38-1.png" width="2016" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="clustering.html#cb40-1" tabindex="-1"></a><span class="fu">kable</span>(mean_values_16)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+cluster
+</th>
+<th style="text-align:right;">
+player_height
+</th>
+<th style="text-align:right;">
+player_weight
+</th>
+<th style="text-align:right;">
+pts
+</th>
+<th style="text-align:right;">
+reb
+</th>
+<th style="text-align:right;">
+ast
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+189.7592
+</td>
+<td style="text-align:right;">
+88.50714
+</td>
+<td style="text-align:right;">
+17.87917
+</td>
+<td style="text-align:right;">
+4.016667
+</td>
+<td style="text-align:right;">
+6.491667
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+209.5500
+</td>
+<td style="text-align:right;">
+114.50930
+</td>
+<td style="text-align:right;">
+16.73000
+</td>
+<td style="text-align:right;">
+8.585000
+</td>
+<td style="text-align:right;">
+2.370000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+191.5459
+</td>
+<td style="text-align:right;">
+87.30312
+</td>
+<td style="text-align:right;">
+13.50000
+</td>
+<td style="text-align:right;">
+3.147059
+</td>
+<td style="text-align:right;">
+3.817647
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+196.7593
+</td>
+<td style="text-align:right;">
+94.16894
+</td>
+<td style="text-align:right;">
+14.13929
+</td>
+<td style="text-align:right;">
+3.557143
+</td>
+<td style="text-align:right;">
+2.671429
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+211.0509
+</td>
+<td style="text-align:right;">
+114.71754
+</td>
+<td style="text-align:right;">
+13.36364
+</td>
+<td style="text-align:right;">
+10.263636
+</td>
+<td style="text-align:right;">
+1.145455
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+206.3262
+</td>
+<td style="text-align:right;">
+104.76231
+</td>
+<td style="text-align:right;">
+13.67692
+</td>
+<td style="text-align:right;">
+5.723077
+</td>
+<td style="text-align:right;">
+1.788461
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+201.0229
+</td>
+<td style="text-align:right;">
+102.05820
+</td>
+<td style="text-align:right;">
+23.42857
+</td>
+<td style="text-align:right;">
+6.871429
+</td>
+<td style="text-align:right;">
+4.957143
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>For season 2022-23</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="clustering.html#cb41-1" tabindex="-1"></a><span class="fu">print</span>(clustering_23)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-41-1.png" width="2016" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="clustering.html#cb42-1" tabindex="-1"></a><span class="fu">kable</span>(mean_values_23)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+cluster
+</th>
+<th style="text-align:right;">
+player_height
+</th>
+<th style="text-align:right;">
+player_weight
+</th>
+<th style="text-align:right;">
+pts
+</th>
+<th style="text-align:right;">
+reb
+</th>
+<th style="text-align:right;">
+ast
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+211.3280
+</td>
+<td style="text-align:right;">
+113.25285
+</td>
+<td style="text-align:right;">
+15.90000
+</td>
+<td style="text-align:right;">
+9.196000
+</td>
+<td style="text-align:right;">
+2.352000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+197.4615
+</td>
+<td style="text-align:right;">
+97.10229
+</td>
+<td style="text-align:right;">
+13.09259
+</td>
+<td style="text-align:right;">
+3.555556
+</td>
+<td style="text-align:right;">
+1.855556
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+206.6925
+</td>
+<td style="text-align:right;">
+112.09392
+</td>
+<td style="text-align:right;">
+28.67500
+</td>
+<td style="text-align:right;">
+9.662500
+</td>
+<td style="text-align:right;">
+6.125000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+189.2300
+</td>
+<td style="text-align:right;">
+88.18241
+</td>
+<td style="text-align:right;">
+13.73182
+</td>
+<td style="text-align:right;">
+3.427273
+</td>
+<td style="text-align:right;">
+5.009091
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+201.2462
+</td>
+<td style="text-align:right;">
+98.91795
+</td>
+<td style="text-align:right;">
+14.81154
+</td>
+<td style="text-align:right;">
+4.538462
+</td>
+<td style="text-align:right;">
+2.276923
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+193.2609
+</td>
+<td style="text-align:right;">
+92.27639
+</td>
+<td style="text-align:right;">
+24.90000
+</td>
+<td style="text-align:right;">
+4.917391
+</td>
+<td style="text-align:right;">
+6.239130
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+195.5800
+</td>
+<td style="text-align:right;">
+92.41340
+</td>
+<td style="text-align:right;">
+18.14737
+</td>
+<td style="text-align:right;">
+4.826316
+</td>
+<td style="text-align:right;">
+4.700000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="summary-from-the-clustering" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Summary From the Clustering<a href="clustering.html#summary-from-the-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>H1 Versatility &amp; Position-less Basketball</strong></p>
+<ul>
+<li>2000-01 Season: players are more dispersed, suggesting a distinct division between positions based on physical attributes like height and weight. For example:
+<ul>
+<li>Traditional Centers: players around 7 feet tall and weighing between 250-300 lbs are prominent. These athletes typically represent traditional centers prevalent during this era (e.g., Tim Duncan, Karl Malone, Kevin Garnett, Dirk Nowitzki, Chris Webber, Shaquille O’Neal).</li>
+<li>Guards: athletes with heights ranging from 6’3” to 6’6” and weights between 180-210 lbs form distinct clusters, representing the roles of shooting and point guards.</li>
+</ul></li>
+<li>2009-10 Season: despite the strong correlation between height and weight suggested by Visualization 4.2, players like LeBron James and Dwyane Wade begin to lead the trend toward a more versatile playing style. LeBron James, for instance, while physically dominant enough to be considered a small forward, also demonstrates the skills and agility typical of guards. He can be grouped with well-known point guards like Steve Nash, Rajon Rondo, and Jason Kidd. On the other hand, players like Russell Westbrook, originally considered point guards, start taking on more scoring roles, leading them to be identified with scorers like Kobe Bryant and Carmelo Anthony. The diverse physical attributes within this scoring cluster make the transitional trend more apparent.</li>
+<li>2015-16 Season: clusters start to merge, indicating the onset of the “position-less” trend. Players of various physical attributes now perform roles previously confined to specific positions. Draymond Green (6’6”, 230 lbs), for example, plays effectively as a point guard, power forward, and even center despite having the height of a traditional small forward. Additionally, dominant forwards who aren’t traditional big men or guards but possess qualities of both are increasingly playing central roles (e.g., LeBron James, Kevin Durant, Kawhi Leonard).</li>
+<li>2022-23 Season: clusters continue to converge, showcasing increasing versatility among players. Athletes with a narrow height range of 6’5” to 6’10” and weight range of 210-250 lbs are now playing multiple roles on the court—whether it’s shooting, ball-handling, or post plays. Players like Luka Dončić, Giannis Antetokounmpo, LeBron James, and Nikola Jokić can be grouped in the same cluster, despite their varying physical sizes.</li>
+</ul>
+<p><strong>H2 Evolution in Playing Style</strong></p>
+<ul>
+<li>2000-01 and 2009-10 Seasons: the dominance of players like Shaquille O’Neal and Tim Duncan indicates a game focused on the post and interior play, supporting the traditional center-focused style. At the same time, players like Kobe Bryant and Vince Carter, typically shooting guards, with a height-weight specification of around 6’6” and 212 lbs, show the traditional divisions in playing roles.</li>
+<li>2015-16 Season: with players like Stephen Curry and LeBron James leading the clusters from 2010 to 2020, it’s evident that the style has evolved to prioritize agility, shooting range, and versatility. The game sees a rise in sharpshooters and versatile players. Stephen Curry (6’2”, 185 lbs) stands out with his unparalleled three-point shooting prowess.
+<ul>
+<li>LeBron James (6’9”, 250 lbs) is a classic example of versatility. Though traditionally a forward, players like him and Draymond Green can handle the ball and pass, and effectively play the defense role as either a forward, guard, or center, embodying the essence of position-less basketball.</li>
+</ul></li>
+<li>2022-23 Season: The domiannce of players like Giannis Antetokounmpo and Nikola Jokić who is traditionally regarded as big player, showcasing the prominent role in ball handling, pass, and play-making like a point guard. Meanwhile, player like Luka Dončić, standing at 6’7” and weighing around 230 lbs, is a prime example of the modern player with a forward style medium-height but can lead the role of play-making and also play inside well.</li>
+</ul>
+</div>
+<div id="hierachical-clustering" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Hierachical Clustering<a href="clustering.html#hierachical-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To present a more intuitive depiction of the nested groupings in player clustering results, and to illustrate the gradual changes and transitions between seasons, we conducted hierarchical clustering visualization. The results were consistent with previous findings.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="clustering.html#cb43-1" tabindex="-1"></a>result_23 <span class="ot">&lt;-</span> <span class="fu">dist</span>(df,</span>
+<span id="cb43-2"><a href="clustering.html#cb43-2" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;euclidean&quot;</span>)</span>
+<span id="cb43-3"><a href="clustering.html#cb43-3" tabindex="-1"></a>result_hc <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="at">d =</span> result_23,</span>
+<span id="cb43-4"><a href="clustering.html#cb43-4" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;ward.D2&quot;</span>)</span>
+<span id="cb43-5"><a href="clustering.html#cb43-5" tabindex="-1"></a><span class="fu">fviz_dend</span>(result_hc,</span>
+<span id="cb43-6"><a href="clustering.html#cb43-6" tabindex="-1"></a>    <span class="at">k =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb43-7"><a href="clustering.html#cb43-7" tabindex="-1"></a>    <span class="at">color_labels_by_k =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb43-8"><a href="clustering.html#cb43-8" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;NBA 2022-2023&quot;</span>,</span>
+<span id="cb43-9"><a href="clustering.html#cb43-9" tabindex="-1"></a>    <span class="at">rect =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-45-1.png" width="960" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="clustering.html#cb44-1" tabindex="-1"></a><span class="fu">fviz_dend</span>(result_hc_01,</span>
+<span id="cb44-2"><a href="clustering.html#cb44-2" tabindex="-1"></a>    <span class="at">k =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb44-3"><a href="clustering.html#cb44-3" tabindex="-1"></a>    <span class="at">color_labels_by_k =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb44-4"><a href="clustering.html#cb44-4" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;NBA 2000-2001&quot;</span>,</span>
+<span id="cb44-5"><a href="clustering.html#cb44-5" tabindex="-1"></a>    <span class="at">rect =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-46-1.png" width="960" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="clustering.html#cb45-1" tabindex="-1"></a><span class="fu">fviz_dend</span>(result_hc_10,</span>
+<span id="cb45-2"><a href="clustering.html#cb45-2" tabindex="-1"></a>    <span class="at">k =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb45-3"><a href="clustering.html#cb45-3" tabindex="-1"></a>    <span class="at">color_labels_by_k =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb45-4"><a href="clustering.html#cb45-4" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;NBA 2009-2010&quot;</span>,</span>
+<span id="cb45-5"><a href="clustering.html#cb45-5" tabindex="-1"></a>    <span class="at">rect =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-46-2.png" width="960" /></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="clustering.html#cb46-1" tabindex="-1"></a><span class="fu">fviz_dend</span>(result_hc_16,</span>
+<span id="cb46-2"><a href="clustering.html#cb46-2" tabindex="-1"></a>    <span class="at">k =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb46-3"><a href="clustering.html#cb46-3" tabindex="-1"></a>    <span class="at">color_labels_by_k =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb46-4"><a href="clustering.html#cb46-4" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;NBA 2015-2016&quot;</span>,</span>
+<span id="cb46-5"><a href="clustering.html#cb46-5" tabindex="-1"></a>    <span class="at">rect =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-46-3.png" width="960" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="in-depth-analysis-for-hw.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transition-of-nba-over-last-20-years.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-Clustering.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["NBA_Visualizing.pdf", "NBA_Visualizing.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

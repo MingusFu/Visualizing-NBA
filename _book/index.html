@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Visualizing NBA</title>
+  <meta name="description" content="Visualizing NBA" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Visualizing NBA" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Visualizing NBA" />
+  
+  
+  
+
+<meta name="author" content="Junqi Fu" />
+
+
+<meta name="date" content="2023-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="hypothesis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Visualizing NBA</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> NBA Data</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-type"><i class="fa fa-check"></i><b>1.1</b> Data Type</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#preliminary-cleaning"><i class="fa fa-check"></i><b>1.2</b> Preliminary Cleaning</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#initial-missing-data-imputation"><i class="fa fa-check"></i><b>1.2.1</b> Initial Missing Data Imputation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#data-cleaning"><i class="fa fa-check"></i><b>1.2.2</b> Data Cleaning</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preliminary-descriptive-statistics"><i class="fa fa-check"></i><b>1.3</b> Preliminary Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothesis.html"><a href="hypothesis.html"><i class="fa fa-check"></i><b>2</b> Hypothesis</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hypothesis.html"><a href="hypothesis.html#density-plot-for-height-and-weight"><i class="fa fa-check"></i><b>2.1</b> Density Plot for Height and Weight</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="hypothesis.html"><a href="hypothesis.html#density-plot-for-height-distribution-over-seasons"><i class="fa fa-check"></i><b>2.1.1</b> Density Plot for Height Distribution Over Seasons</a></li>
+<li class="chapter" data-level="2.1.2" data-path="hypothesis.html"><a href="hypothesis.html#density-plot-for-weight-distribution-over-seasons"><i class="fa fa-check"></i><b>2.1.2</b> Density Plot for Weight Distribution Over Seasons</a></li>
+<li class="chapter" data-level="2.1.3" data-path="hypothesis.html"><a href="hypothesis.html#general-conclusion"><i class="fa fa-check"></i><b>2.1.3</b> General Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="hypothesis.html"><a href="hypothesis.html#inference-hypothesis-based-on-the-density-plot-and-initial-summary"><i class="fa fa-check"></i><b>2.2</b> Inference &amp; Hypothesis Based On The Density Plot and Initial Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="correlation-analysis.html"><a href="correlation-analysis.html"><i class="fa fa-check"></i><b>3</b> Correlation Analysis</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="correlation-analysis.html"><a href="correlation-analysis.html#correlation-between-hw-and-others"><i class="fa fa-check"></i><b>3.1</b> Correlation Between H/W and Others</a></li>
+<li class="chapter" data-level="3.2" data-path="correlation-analysis.html"><a href="correlation-analysis.html#correlation-matrix"><i class="fa fa-check"></i><b>3.2</b> Correlation Matrix</a></li>
+<li class="chapter" data-level="3.3" data-path="correlation-analysis.html"><a href="correlation-analysis.html#correlation-between-hw-and-ra"><i class="fa fa-check"></i><b>3.3</b> Correlation Between H/W and R/A</a></li>
+<li class="chapter" data-level="3.4" data-path="correlation-analysis.html"><a href="correlation-analysis.html#summary-from-scatter-plots"><i class="fa fa-check"></i><b>3.4</b> Summary From Scatter Plots</a></li>
+<li class="chapter" data-level="3.5" data-path="correlation-analysis.html"><a href="correlation-analysis.html#net-rating-by-players-physical-attributes"><i class="fa fa-check"></i><b>3.5</b> Net Rating By Player’s Physical Attributes</a></li>
+<li class="chapter" data-level="3.6" data-path="correlation-analysis.html"><a href="correlation-analysis.html#summary-from-box-plot"><i class="fa fa-check"></i><b>3.6</b> Summary From Box Plot</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="correlation-analysis.html"><a href="correlation-analysis.html#net-rating-by-player-height"><i class="fa fa-check"></i><b>3.6.1</b> Net Rating by Player Height</a></li>
+<li class="chapter" data-level="3.6.2" data-path="correlation-analysis.html"><a href="correlation-analysis.html#net-rating-by-player-weight"><i class="fa fa-check"></i><b>3.6.2</b> Net Rating by Player Weight</a></li>
+<li class="chapter" data-level="3.6.3" data-path="correlation-analysis.html"><a href="correlation-analysis.html#general-summary"><i class="fa fa-check"></i><b>3.6.3</b> General Summary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="in-depth-analysis-for-hw.html"><a href="in-depth-analysis-for-hw.html"><i class="fa fa-check"></i><b>4</b> In-depth Analysis for H/W</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="in-depth-analysis-for-hw.html"><a href="in-depth-analysis-for-hw.html#what-can-be-answered-for-now"><i class="fa fa-check"></i><b>4.1</b> What Can Be Answered For Now?</a></li>
+<li class="chapter" data-level="4.2" data-path="in-depth-analysis-for-hw.html"><a href="in-depth-analysis-for-hw.html#time-series-visualization"><i class="fa fa-check"></i><b>4.2</b> Time-series Visualization</a></li>
+<li class="chapter" data-level="4.3" data-path="in-depth-analysis-for-hw.html"><a href="in-depth-analysis-for-hw.html#summary-from-4.2"><i class="fa fa-check"></i><b>4.3</b> Summary From 4.2</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>5</b> Clustering</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="clustering.html"><a href="clustering.html#k-means-clustering-of-players"><i class="fa fa-check"></i><b>5.1</b> k-means Clustering Of Players</a></li>
+<li class="chapter" data-level="5.2" data-path="clustering.html"><a href="clustering.html#summary-from-the-clustering"><i class="fa fa-check"></i><b>5.2</b> Summary From the Clustering</a></li>
+<li class="chapter" data-level="5.3" data-path="clustering.html"><a href="clustering.html#hierachical-clustering"><i class="fa fa-check"></i><b>5.3</b> Hierachical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="transition-of-nba-over-last-20-years.html"><a href="transition-of-nba-over-last-20-years.html"><i class="fa fa-check"></i><b>6</b> Transition of NBA Over Last 20 Years</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="transition-of-nba-over-last-20-years.html"><a href="transition-of-nba-over-last-20-years.html#versatility-position-less-basketball"><i class="fa fa-check"></i><b>6.1</b> Versatility &amp; Position-less Basketball</a></li>
+<li class="chapter" data-level="6.2" data-path="transition-of-nba-over-last-20-years.html"><a href="transition-of-nba-over-last-20-years.html#evolution-in-playing-style"><i class="fa fa-check"></i><b>6.2</b> Evolution in Playing Style</a></li>
+<li class="chapter" data-level="6.3" data-path="transition-of-nba-over-last-20-years.html"><a href="transition-of-nba-over-last-20-years.html#potential-future-trends"><i class="fa fa-check"></i><b>6.3</b> Potential Future Trends</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Visualizing NBA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Visualizing NBA</h1>
+<p class="author"><em>Junqi Fu</em></p>
+<p class="date"><em>2023-10-21</em></p>
+</div>
+<div id="nba-data" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> NBA Data<a href="index.html#nba-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The data set contains all the players’ performance data from season 1996-97 to season 2022-23.</p>
+<div id="data-type" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Data Type<a href="index.html#data-type" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here’s a brief explanation of some important variable in the analysis:</p>
+<ul>
+<li><strong>player_height</strong>: player’s height in the given season.</li>
+<li><strong>player_weight</strong>: player’s weight in the given season.</li>
+<li><strong>gp</strong>: total games a player has played in the given season.</li>
+<li><strong>pts</strong>: player’s average points per game.</li>
+<li><strong>reb</strong>: player’s average rebound per game.</li>
+<li><strong>ast</strong>: player’s average assist per game.</li>
+<li><strong>net_rating</strong>: the team’s point differential per 100 possessions while a player is on court.</li>
+<li><strong>oreb_pct</strong>: offensive rebound percentage - an estimate of the percentage of available offensive rebounds a player grabbed.</li>
+<li><strong>dreb_pct</strong>: defensive rebound percentage - an estimate of the percentage of available defensive rebounds a player grabbed.</li>
+<li><strong>usg_pct</strong>: usage percentage - an estimate of the percentage of team plays used by a player.</li>
+<li><strong>ts_pct</strong>: true shooting percentage - a measure of shooting efficiency that takes into account field goals, 3-point field goals, and free throws.</li>
+<li><strong>ast_pct</strong>: assist percentage - an estimate of the percentage of teammate field goals a player assisted.</li>
+<li><strong>season</strong>: season - the NBA season for which these stats apply.</li>
+</ul>
+</div>
+<div id="preliminary-cleaning" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Preliminary Cleaning<a href="index.html#preliminary-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="initial-missing-data-imputation" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Initial Missing Data Imputation<a href="index.html#initial-missing-data-imputation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(nba))</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" tabindex="-1"></a><span class="fu">md.pattern</span>(nba)</span></code></pre></div>
+<pre><code>##  /\     /\
+## {  `---&#39;  }
+## {  O   O  }
+## ==&gt;  V &lt;==  No need for mice. This data set is completely observed.
+##  \  \|/  /
+##   `-----&#39;</code></pre>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-3-1.png" width="1152" /></p>
+<pre><code>##       X player_name team_abbreviation age player_height player_weight college
+## 12844 1           1                 1   1             1             1       1
+##       0           0                 0   0             0             0       0
+##       country draft_year draft_round draft_number gp pts reb ast net_rating
+## 12844       1          1           1            1  1   1   1   1          1
+##             0          0           0            0  0   0   0   0          0
+##       oreb_pct dreb_pct usg_pct ts_pct ast_pct season  
+## 12844        1        1       1      1       1      1 0
+##              0        0       0      0       0      0 0</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" tabindex="-1"></a><span class="fu">md.pattern</span>(<span class="fu">subset</span>(nba, <span class="at">select =</span> <span class="fu">c</span>(player_height,</span>
+<span id="cb6-2"><a href="index.html#cb6-2" tabindex="-1"></a>    player_weight, gp, pts, reb, ast, net_rating)))</span></code></pre></div>
+<pre><code>##  /\     /\
+## {  `---&#39;  }
+## {  O   O  }
+## ==&gt;  V &lt;==  No need for mice. This data set is completely observed.
+##  \  \|/  /
+##   `-----&#39;</code></pre>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-3-2.png" width="1152" /></p>
+<pre><code>##       player_height player_weight gp pts reb ast net_rating  
+## 12844             1             1  1   1   1   1          1 0
+##                   0             0  0   0   0   0          0 0</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="index.html#cb9-1" tabindex="-1"></a><span class="fu">aggr</span>(<span class="fu">subset</span>(nba, <span class="at">select =</span> <span class="fu">c</span>(player_height,</span>
+<span id="cb9-2"><a href="index.html#cb9-2" tabindex="-1"></a>    player_weight, gp, pts, reb, ast, net_rating)),</span>
+<span id="cb9-3"><a href="index.html#cb9-3" tabindex="-1"></a>    <span class="at">prop =</span> F, <span class="at">numbers =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="NBA_visualizing_files/figure-html/unnamed-chunk-3-3.png" width="1152" /></p>
+</div>
+<div id="data-cleaning" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Data Cleaning<a href="index.html#data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>identify outlier exists in the net_rating, with the 300 as the max and -250 as the min.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="index.html#cb10-1" tabindex="-1"></a><span class="fu">summary</span>(nba)</span></code></pre></div>
+<pre><code>##        X         player_name        team_abbreviation       age       
+##  Min.   :    0   Length:12844       Length:12844       Min.   :18.00  
+##  1st Qu.: 3211   Class :character   Class :character   1st Qu.:24.00  
+##  Median : 6422   Mode  :character   Mode  :character   Median :26.00  
+##  Mean   : 6422                                         Mean   :27.05  
+##  3rd Qu.: 9632                                         3rd Qu.:30.00  
+##  Max.   :12843                                         Max.   :44.00  
+##  player_height   player_weight      college            country         
+##  Min.   :160.0   Min.   : 60.33   Length:12844       Length:12844      
+##  1st Qu.:193.0   1st Qu.: 90.72   Class :character   Class :character  
+##  Median :200.7   Median : 99.79   Mode  :character   Mode  :character  
+##  Mean   :200.6   Mean   :100.26                                        
+##  3rd Qu.:208.3   3rd Qu.:108.86                                        
+##  Max.   :231.1   Max.   :163.29                                        
+##   draft_year        draft_round        draft_number             gp       
+##  Length:12844       Length:12844       Length:12844       Min.   : 1.00  
+##  Class :character   Class :character   Class :character   1st Qu.:31.00  
+##  Mode  :character   Mode  :character   Mode  :character   Median :57.00  
+##                                                           Mean   :51.15  
+##                                                           3rd Qu.:73.00  
+##                                                           Max.   :85.00  
+##       pts              reb              ast           net_rating      
+##  Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   :-250.000  
+##  1st Qu.: 3.600   1st Qu.: 1.800   1st Qu.: 0.600   1st Qu.:  -6.400  
+##  Median : 6.700   Median : 3.000   Median : 1.200   Median :  -1.300  
+##  Mean   : 8.213   Mean   : 3.558   Mean   : 1.825   Mean   :  -2.226  
+##  3rd Qu.:11.500   3rd Qu.: 4.700   3rd Qu.: 2.400   3rd Qu.:   3.200  
+##  Max.   :36.100   Max.   :16.300   Max.   :11.700   Max.   : 300.000  
+##     oreb_pct          dreb_pct         usg_pct           ts_pct      
+##  Min.   :0.00000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.:0.02100   1st Qu.:0.0960   1st Qu.:0.1490   1st Qu.:0.4820  
+##  Median :0.04000   Median :0.1305   Median :0.1810   Median :0.5250  
+##  Mean   :0.05407   Mean   :0.1406   Mean   :0.1846   Mean   :0.5131  
+##  3rd Qu.:0.08300   3rd Qu.:0.1790   3rd Qu.:0.2170   3rd Qu.:0.5630  
+##  Max.   :1.00000   Max.   :1.0000   Max.   :1.0000   Max.   :1.5000  
+##     ast_pct          season         
+##  Min.   :0.0000   Length:12844      
+##  1st Qu.:0.0660   Class :character  
+##  Median :0.1030   Mode  :character  
+##  Mean   :0.1316                     
+##  3rd Qu.:0.1790                     
+##  Max.   :1.0000</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="index.html#cb12-1" tabindex="-1"></a>nba_clean <span class="ot">&lt;-</span> (<span class="fu">which</span>(nba<span class="sc">$</span>net_rating <span class="sc">&gt;=</span> <span class="dv">300</span> <span class="sc">|</span></span>
+<span id="cb12-2"><a href="index.html#cb12-2" tabindex="-1"></a>    nba<span class="sc">$</span>net_rating <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">200</span>))</span>
+<span id="cb12-3"><a href="index.html#cb12-3" tabindex="-1"></a>nba <span class="ot">&lt;-</span> nba[<span class="sc">-</span>nba_clean]  <span class="co">#remove the outliers.</span></span></code></pre></div>
+</div>
+</div>
+<div id="preliminary-descriptive-statistics" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Preliminary Descriptive Statistics<a href="index.html#preliminary-descriptive-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>age</strong>: the range is between a minimum of 18 years and a maximum of 44 years, with the average age being 26 years old.</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="index.html#cb13-1" tabindex="-1"></a><span class="fu">summary</span>(nba<span class="sc">$</span>age)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   18.00   24.00   26.00   27.05   30.00   44.00</code></pre>
+<ul>
+<li><strong>height</strong>: the range is between a minimum of 160 cm and a maximum of 231.1 cm, with the average height as 200.7 cm.</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="index.html#cb15-1" tabindex="-1"></a><span class="fu">summary</span>(nba<span class="sc">$</span>player_height)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   160.0   193.0   200.7   200.6   208.3   231.1</code></pre>
+<ul>
+<li><strong>weight</strong>: the range is between a minimum of 60.33 kg and a maximum of 163.29 kg, with the average as 100 kg.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="index.html#cb17-1" tabindex="-1"></a><span class="fu">summary</span>(nba<span class="sc">$</span>player_weight)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   60.33   90.72   99.79  100.26  108.86  163.29</code></pre>
+<ul>
+<li><strong>player</strong>: with a highly competitive threshold, only 2551 players have played in the league since 1996.</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="index.html#cb19-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">unique</span>(nba<span class="sc">$</span>player_name))</span></code></pre></div>
+<pre><code>##    Length     Class      Mode 
+##      2551 character character</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="hypothesis.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["NBA_Visualizing.pdf", "NBA_Visualizing.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
