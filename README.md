@@ -1,1 +1,1 @@
-This is a personal data visualization project of the impact of NBA's playing style changes over the past 28 years on the player's physical attributes. You can find here the data resource: https://www.kaggle.com/code/justinas/nba-height-and-weight-analysis
+This is my personal data visualization project of the impact of NBA's playing style changes over the past 28 years on the player's physical attributes. You can find here the data resource: https://www.kaggle.com/code/justinas/nba-height-and-weight-analysis
